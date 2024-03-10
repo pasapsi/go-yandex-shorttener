@@ -33,8 +33,8 @@ func mainGET(w http.ResponseWriter, r *http.Request) {
 		decode, _ := b64.StdEncoding.DecodeString(shortId)
 		w.Header().Set("content-type", "text/plain")
 		w.Header().Set("Location", string(decode))
-		//sEnc := b64.StdEncoding.EncodeToString([]byte(shortId))
-		//fmt.Fprintf(w, "Hello, %q", sEnc)
+		//Enc := b64.StdEncoding.EncodeToString([]byte(shortId))
+		//fmt.Fprintf(w, "Hello, %q", Enc)
 		w.WriteHeader(307)
 		return
 	} else {
