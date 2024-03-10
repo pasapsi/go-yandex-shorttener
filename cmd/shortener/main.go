@@ -17,13 +17,6 @@ func mainPOST(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("content-type", "text/plain")
 		w.Write([]byte(host + "/" + sEnc))
 		return
-
-		//sEnc := b64.StdEncoding.EncodeToString([]byte(shortId))
-		// пока установим ответ-заглушку, без проверки ошибок
-		//_, _ = w.Write([]byte(`
-		//{
-		//	"response":
-		//`))
 	} else {
 		w.WriteHeader(400)
 	}
@@ -31,13 +24,10 @@ func mainPOST(w http.ResponseWriter, r *http.Request) {
 
 func mainGET(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
-		//host := r.Host
 		shortId := strings.Split(r.URL.Path, "/")[1]
 		decode, _ := b64.StdEncoding.DecodeString(shortId)
 		w.Header().Set("content-type", "text/plain")
 		w.Header().Set("Location", string(decode))
-		//Enc := b64.StdEncoding.EncodeToString([]byte(shortId))
-		//fmt.Fprintf(w, "Hello, %q", Enc)
 		w.WriteHeader(307)
 		return
 	} else {
