@@ -10,10 +10,13 @@ import (
 func mainPOST(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		body, _ := io.ReadAll(r.Body)
+		host := r.Host
+		sEnc := b64.StdEncoding.EncodeToString([]byte(body))
 
 		w.WriteHeader(201)
 		w.Header().Set("content-type", "text/plain")
-		w.Write([]byte(body))
+		w.Write([]byte(host + "/" + sEnc))
+		return
 
 		//sEnc := b64.StdEncoding.EncodeToString([]byte(shortId))
 		// пока установим ответ-заглушку, без проверки ошибок
